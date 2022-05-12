@@ -43,7 +43,7 @@
   <dt>Cargas de trabajo</dt>
   <dd> Durante la instalación los paquetes necesarios son「Desarrollo de ASP.NET y web」y opcionalmente「Almacenamiento y procesamiento de datos」, las demás instalaciones no son requeridas por nuestro proyecto actual.</dd>
   
-  
+  <p>Nota: Si les acomoda pueden trabajar con GitHub Desktop, solo tener cuidado con lo que hacen,<a href="https://desktop.github.com"> Link de descarga</a></p>
 </dl>
   
   
