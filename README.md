@@ -31,13 +31,6 @@
       <td><a href="https://drive.google.com/drive/folders/1wOnj8perfi1qiWLO5Q5xTsoOZFgVw5kL?usp=sharing" target="_blank">Archivos</a></td>
     </tr>
   </tbody>
-  <tfooter>
-    <tr>
-      <th>Nombre programa</th>
-      <th>Versión</th>
-      <th>Link</th>
-    </tr>
-  </tfooter>
 </table>
   
 <hr>
