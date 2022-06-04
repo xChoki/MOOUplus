@@ -1,6 +1,6 @@
 <h1>Proyecto para Integración de plataformas</h1>
 
-<h2>Nombre del proyecto: MOOU+ (MOOUplus)<h2>
+<p>Nombre del proyecto: MOOU+ (MOOUplus)<p>
 <hr>
 
 <table>
@@ -33,11 +33,10 @@
   </tbody>
 </table>
 
-<ul>
-  <li>Coffee</li>
-  <li>Tea</li>
-  <li>Milk</li>
-</ul>
+<dl>
+  <dt><p>Carpeta drive</p></dt>
+  <dd><p>- <a href="https://drive.google.com/drive/folders/1wOnj8perfi1qiWLO5Q5xTsoOZFgVw5kL?usp=sharing"> LINK </p></dd>
+</dl>
  
 <hr>
 <h2>Instruciones básicas<h2>
