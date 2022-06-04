@@ -1,0 +1,48 @@
+﻿@page
+@model Pintermedio.Vistas.UsuariosMySqlModel
+@using Pintermedio.Modelo;
+@using Pintermedio.Controlador;
+@{
+}
+
+@{
+
+    List<DatosMoodle> lista;
+    Servicios servicios = new Servicios();
+    lista = servicios.ListarMySql(-1);
+
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="form-inline pull-right">
+            <label>Buscar</label>
+            <input type="text" id="txtSearch" class="form-control" value="" />
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>RUT</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var c in lista)
+                {
+                    //servicios.Insert_Usuario(c);
+                    <tr>
+
+                        <td>@c.Id_student</td>
+                        <td>@c.Firstname</td>
+                        <td>@c.Lastname1</td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
