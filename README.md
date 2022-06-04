@@ -55,6 +55,12 @@
       <td>7.4.29-1-VC15</td>
       <td><a href="https://drive.google.com/file/d/1ZreIc4XkLFW_0RXPJMjR3XYYLBTNL9V5/view?usp=sharing" target="_blank">LINK</a></td>
     </tr>
+    <!-- Bases de datos -->
+    <tr>
+      <td>Bases de datos</td>
+      <td>-</td>
+      <td><a href="https://drive.google.com/drive/folders/1fsBBX1bYsDV-kLEjud_hLXQeA8OmZZ0i?usp=sharing" target="_blank">LINK</a></td>
+    </tr>
   </tbody>
 </table>
 
