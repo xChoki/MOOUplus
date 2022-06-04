@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using Pintermedio.Biblioteca;
 using Pintermedio.Modelo;
+using P_MOOU_.Modelo;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -137,30 +138,28 @@ namespace Pintermedio.Controlador
             }
         }
 
-        public List<CarrerasUmas> GetCarrerasMoodle(int idcarrera)
+        public List<EquivMoodleUmas> GetEquivMoodleUmas(string idcarrera)
         {
             DataTable dt = null;
-            List<CursosMoodle> lista = new List<CursosMoodle>();
-            CursosMoodle notasmoodle;
-            string sql = "select * from notas";
-            if (idrol != -1)
-                sql = "select * from notas where idrol=" + idrol;
+            List<EquivMoodleUmas> lista = new List<EquivMoodleUmas>();
+            EquivMoodleUmas equivMoodleUmas;
+
+            string sql = "select m.idcourse from MYSQL...tbl_datosmoodle m right join DB_UMAS.dbo.tbl_carreras c on m.idrol = c.codcarr where c.codcarr = '" + idcarrera + "'";
+            
             try
             {
 
-                MySqlCommand cmd = new MySqlCommand();
+                SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = sql;
                 db = new BaseDato();
-                dt = db.EjecutarConsultaMySql(cmd);
+                dt = db.EjecutarConsultaSQLServer(cmd);
                 //pasamos del DataTable a una List de Clientes                 
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    notasmoodle = new CursosMoodle();
-                    notasmoodle.Id = int.Parse(dt.Rows[i]["id"].ToString());
-                    notasmoodle.Namecourse = dt.Rows[i]["namecourse"].ToString();
-                    notasmoodle.Idrol = dt.Rows[i]["idrol"].ToString();
-                    lista.Add(notasmoodle);
+                    equivMoodleUmas = new EquivMoodleUmas();
+                    equivMoodleUmas.Idcourse = int.Parse(dt.Rows[i]["idcourse"].ToString());
+                    lista.Add(equivMoodleUmas);
                 }
                 return lista;
             }

@@ -3,6 +3,7 @@
 @model Pintermedio.Pages.Codigos_EquivalenteModel
 @using Pintermedio.Modelo
 @using Pintermedio.Controlador
+@using P_MOOU_.Modelo
 @{
 }
 <h2>Generar Códigos Equivalente</h2>
@@ -16,6 +17,8 @@
     List<CarrerasUmas> listacarreras = new List<CarrerasUmas>();
     listacarreras = servicio.GetCarreras(-1);
 
+    List<EquivMoodleUmas> listaequiv = new List<EquivMoodleUmas>();
+    listaequiv = servicio.GetEquivMoodleUmas("ACI403");
 }
 
 <div class="accordion" id="accordionExample">
@@ -41,7 +44,9 @@
                         <tbody>
                             <tr>
                                 <td>@c.Codcarr</td>
-                                <td>[Insertar cod]</td>
+                                @foreach (var e in listaequiv) {
+                                    <td>@e.Idcourse</td>
+                                }
                             </tr>
                         </tbody>
                     </table>
