@@ -1,0 +1,55 @@
+﻿
+@page
+@model Pintermedio.Pages.Codigos_EquivalenteModel
+@using Pintermedio.Modelo
+@using Pintermedio.Controlador
+@{
+}
+<h2>Generar Códigos Equivalente</h2>
+@{
+    List<CursosMoodle> listanotas = new List<CursosMoodle>();
+    Servicios servicio = new Servicios();
+    listanotas = servicio.GetNotas(-1);
+
+
+    List<CarrerasUmas> listacarreras = new List<CarrerasUmas>();
+    listacarreras = servicio.GetCarreras(-1);
+
+}
+
+<div class="accordion" id="accordionExample">
+    @{int ij = 1;}
+    @foreach (var c in listacarreras)
+    {
+        <div class="accordion-item">
+
+            <h2 class="accordion-header" id="heading_@ij">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_@ij" aria-expanded="true" aria-controls="collapse_@ij">
+                    @c.Carrera
+                </button>
+            </h2>
+            <div id="collapse_@ij" class="accordion-collapse collapse" aria-labelledby="heading_@ij" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">U+</th>
+                                <th scope="col">Moodle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@c.Codcarr</td>
+                                <td>[Insertar cod]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        ij++;
+    }
+</div>
+
+
+

@@ -7,9 +7,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace P_MOOU_.Pages
+namespace Pintermedio.Pages
 {
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    [IgnoreAntiforgeryToken]
     public class ErrorModel : PageModel
     {
         public string RequestId { get; set; }

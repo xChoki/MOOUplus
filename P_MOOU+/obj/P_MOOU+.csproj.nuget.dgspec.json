@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\javie\\source\\repos\\S_MOOU+\\P_MOOU+\\P_MOOU+.csproj": {}
+    "D:\\GIT Clones\\MOOUplus\\P_MOOU+\\P_MOOU+.csproj": {}
   },
   "projects": {
-    "C:\\Users\\javie\\source\\repos\\S_MOOU+\\P_MOOU+\\P_MOOU+.csproj": {
+    "D:\\GIT Clones\\MOOUplus\\P_MOOU+\\P_MOOU+.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\javie\\source\\repos\\S_MOOU+\\P_MOOU+\\P_MOOU+.csproj",
+        "projectUniqueName": "D:\\GIT Clones\\MOOUplus\\P_MOOU+\\P_MOOU+.csproj",
         "projectName": "P_MOOU+",
-        "projectPath": "C:\\Users\\javie\\source\\repos\\S_MOOU+\\P_MOOU+\\P_MOOU+.csproj",
+        "projectPath": "D:\\GIT Clones\\MOOUplus\\P_MOOU+\\P_MOOU+.csproj",
         "packagesPath": "C:\\Users\\javie\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\javie\\source\\repos\\S_MOOU+\\P_MOOU+\\obj\\",
+        "outputPath": "D:\\GIT Clones\\MOOUplus\\P_MOOU+\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -43,6 +43,16 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[8.0.29, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.6.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
