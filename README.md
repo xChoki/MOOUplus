@@ -32,7 +32,13 @@
     </tr>
   </tbody>
 </table>
-  
+
+<ul>
+  <li>Coffee</li>
+  <li>Tea</li>
+  <li>Milk</li>
+</ul>
+ 
 <hr>
 <h2>Instruciones básicas<h2>
 <dl>
