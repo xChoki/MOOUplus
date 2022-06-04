@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Pintermedio.Modelo
 {
-    public class Alumnos
+    public class DatosMoodle
     {
 		int id_table;
 		int idcourse;
@@ -24,7 +24,7 @@ namespace Pintermedio.Modelo
 		string tipe_schedule;
 
 
-		public Alumnos() { }
+		public DatosMoodle() { }
 
         public int Id_table { get => id_table; set => id_table = value; }
         public int Idcourse { get => idcourse; set => idcourse = value; }

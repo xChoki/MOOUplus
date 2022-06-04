@@ -16,11 +16,11 @@ namespace Pintermedio.Controlador
 
         BaseDato db;
         
-        public List<Alumnos> ListarMySql(int id)
+        public List<DatosMoodle> ListarMySql(int id)
         {
             DataTable dt = null;
-            List<Alumnos> lista = new List<Alumnos>();
-            Alumnos usuario;
+            List<DatosMoodle> lista = new List<DatosMoodle>();
+            DatosMoodle usuario;
             string sql = "select * from tbl_datosmoodle group by id_student";
             if (id != -1)
                 sql = "select * from tbl_datosmoodle where id=" + id + " group by id_student";
@@ -51,7 +51,7 @@ namespace Pintermedio.Controlador
                     string nameteacher;
                     int id_campus;
                     string tipe_schedule;*/
-                    usuario = new Alumnos();
+                    usuario = new DatosMoodle();
                     usuario.Id_student = int.Parse(dt.Rows[i]["id_student"].ToString());
                     usuario.Firstname = dt.Rows[i]["firstname"].ToString();
                     usuario.Lastname1 = dt.Rows[i]["lastname1"].ToString();
@@ -65,15 +65,6 @@ namespace Pintermedio.Controlador
                 return null;
 
             }
-        }
-
-        public PartialViewResult SearchUsers(string searchText)
-        {
-            List<Alumnos> lista = new List<Alumnos>();
-            var result = lista.Where(a => a.Firstname.ToLower().Contains(searchText) || a.Id_student.ToString().Contains(searchText)).ToList();
-
-            return PartialView("_GridView", result);
-
         }
 
         public List<CursosMoodle> GetNotas(int idrol)
@@ -132,9 +123,44 @@ namespace Pintermedio.Controlador
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     carrerasumas = new CarrerasUmas();
-                    carrerasumas.Codcarr = int.Parse(dt.Rows[i]["codcarr"].ToString());
+                    carrerasumas.Codcarr = dt.Rows[i]["codcarr"].ToString();
                     carrerasumas.Carrera = dt.Rows[i]["carrera"].ToString();
                     lista.Add(carrerasumas);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+
+            }
+        }
+
+        public List<CarrerasUmas> GetCarrerasMoodle(int idcarrera)
+        {
+            DataTable dt = null;
+            List<CursosMoodle> lista = new List<CursosMoodle>();
+            CursosMoodle notasmoodle;
+            string sql = "select * from notas";
+            if (idrol != -1)
+                sql = "select * from notas where idrol=" + idrol;
+            try
+            {
+
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql;
+                db = new BaseDato();
+                dt = db.EjecutarConsultaMySql(cmd);
+                //pasamos del DataTable a una List de Clientes                 
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    notasmoodle = new CursosMoodle();
+                    notasmoodle.Id = int.Parse(dt.Rows[i]["id"].ToString());
+                    notasmoodle.Namecourse = dt.Rows[i]["namecourse"].ToString();
+                    notasmoodle.Idrol = dt.Rows[i]["idrol"].ToString();
+                    lista.Add(notasmoodle);
                 }
                 return lista;
             }

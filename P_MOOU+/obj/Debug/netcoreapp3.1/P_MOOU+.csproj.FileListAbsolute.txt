@@ -85,7 +85,6 @@ D:\GIT Clones\MOOUplus\P_MOOU+\obj\Debug\netcoreapp3.1\Razor\Pages\Privacy.cshtm
 D:\GIT Clones\MOOUplus\P_MOOU+\obj\Debug\netcoreapp3.1\Razor\Pages\Shared\_Layout.cshtml.g.cs
 D:\GIT Clones\MOOUplus\P_MOOU+\obj\Debug\netcoreapp3.1\Razor\Pages\Shared\_ValidationScriptsPartial.cshtml.g.cs
 D:\GIT Clones\MOOUplus\P_MOOU+\obj\Debug\netcoreapp3.1\Razor\Pages\UsuariosMySql.cshtml.g.cs
-D:\GIT Clones\MOOUplus\P_MOOU+\obj\Debug\netcoreapp3.1\Razor\Pages\_ViewImports.cshtml.g.cs
 D:\GIT Clones\MOOUplus\P_MOOU+\obj\Debug\netcoreapp3.1\Razor\Pages\_ViewStart.cshtml.g.cs
 D:\GIT Clones\MOOUplus\P_MOOU+\obj\Debug\netcoreapp3.1\P_MOOU+.RazorTargetAssemblyInfo.cache
 D:\GIT Clones\MOOUplus\P_MOOU+\obj\Debug\netcoreapp3.1\P_MOOU+.RazorTargetAssemblyInfo.cs
