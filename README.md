@@ -77,14 +77,11 @@
   <dd><p>MySQL Connector necesita Microsoft Data Access Components 2.8 SDK y Microsoft Visual C++ 2013 para funcionar, al instalar Connector deben ingresar a Origen de datos ODBC y en la pestaña DSN de sistema agregar la conexión [Ver foto 1], y en SSMS deben ir a //[Base de Datos]>Server Objects>Linked Servers// clic derecho y New Linked Server [Ver foto 2 y 3]</p><dd>
   
   
-  <p> foto 1</p>
-  <img src="https://imgur.com/a/5iD0JZt"/>
+  <p> <a href="https://imgur.com/a/5iD0JZt">foto 1</a></p>
   
-  <p> foto 2</p>
-  <img src="https://imgur.com/a/bgPUdGE"/>
+  <p> <a href="https://imgur.com/a/bgPUdGE">foto 2</a></p>
   
-  <p> foto 3</p>
-  <img src="https://imgur.com/a/5iD0JZt"/>
+  <p> <a href="https://imgur.com/a/5iD0JZt">foto 3</a></p>
   
   <p>Nota: Si les acomoda pueden trabajar con GitHub Desktop, solo tener cuidado con lo que hacen,<a href="https://desktop.github.com" target="_blank"> Link de descarga</a></p>
 </dl>
