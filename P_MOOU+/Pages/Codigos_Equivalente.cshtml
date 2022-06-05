@@ -7,22 +7,21 @@
 @{
 }
 <h2>Generar Códigos Equivalente</h2>
+@{int ij = 1;}
 @{
     Servicios servicio = new Servicios();
-    /*
-    List<CursosMoodle> listanotas = new List<CursosMoodle>();
-    listanotas = servicio.GetNotas(-1);
-    */
+
+    List<DatosMoodle> lista;
+    lista = servicio.ListarMySql(-1);
 
     List<CarrerasUmas> listacarreras = new List<CarrerasUmas>();
     listacarreras = servicio.GetCarreras(-1);
 
     List<EquivMoodleUmas> listaequiv = new List<EquivMoodleUmas>();
-    listaequiv = servicio.GetEquivMoodleUmas("ACI403");
+    listaequiv = servicio.GetEquivMoodleUmas("");
 }
 
 <div class="accordion" id="accordionExample">
-    @{int ij = 1;}
     @foreach (var c in listacarreras)
     {
         <div class="accordion-item">
@@ -44,8 +43,13 @@
                         <tbody>
                             <tr>
                                 <td>@c.Codcarr</td>
-                                @foreach (var e in listaequiv) {
-                                    <td>@e.Idcourse</td>
+                                @foreach (var e in listaequiv)
+                                {
+                                    if (@e.Codcarr == @c.Codcarr)
+                                    {
+
+                                        <td>@e.Idcourse</td>
+                                    }
                                 }
                             </tr>
                         </tbody>

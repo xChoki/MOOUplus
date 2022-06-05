@@ -111,7 +111,7 @@ namespace Pintermedio.Controlador
             CarrerasUmas carrerasumas;
             string sql = "select * from tbl_carreras";
             if (idcarrera != -1)
-                sql = "select * from carreras where codcarr=" + idcarrera;
+                sql = "select * from tbl_carreras where codcarr=" + idcarrera;
             try
             {
 
@@ -144,11 +144,11 @@ namespace Pintermedio.Controlador
             List<EquivMoodleUmas> lista = new List<EquivMoodleUmas>();
             EquivMoodleUmas equivMoodleUmas;
 
-            string sql = "select m.idcourse from MYSQL...tbl_datosmoodle m right join DB_UMAS.dbo.tbl_carreras c on m.idrol = c.codcarr where c.codcarr = '" + idcarrera + "'";
-            
+            string sql = "select m.idcourse, c.codcarr, c.carrera from MYSQL...tbl_datosmoodle m join DB_UMAS.dbo.tbl_carreras c on m.idrol = c.codcarr";
+            if (idcarrera != "")
+                sql = "select m.idcourse, c.codcarr, c.carrera from MYSQL...tbl_datosmoodle m join DB_UMAS.dbo.tbl_carreras c on m.idrol = c.codcarr where c.codcarr = '" + idcarrera + "')";
             try
             {
-
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = sql;
@@ -159,6 +159,8 @@ namespace Pintermedio.Controlador
                 {
                     equivMoodleUmas = new EquivMoodleUmas();
                     equivMoodleUmas.Idcourse = int.Parse(dt.Rows[i]["idcourse"].ToString());
+                    equivMoodleUmas.Codcarr = dt.Rows[i]["codcarr"].ToString();
+                    equivMoodleUmas.Nombre = dt.Rows[i]["carrera"].ToString();
                     lista.Add(equivMoodleUmas);
                 }
                 return lista;
@@ -204,16 +206,33 @@ namespace Pintermedio.Controlador
             }
         }
 
-        /*
-        public bool Insert_Usuario(Alumnos usuario)
+        
+        public bool Insert_Carreras(DatosMoodle carreras)
         {
             bool std = true;
             try
             {
-                string sql = $"insert into usuarios " +
+                /*int id_table;
+                int idcourse;
+                int id_student;
+                string lastname1;
+                string lastname2;
+                string firstname;
+                string idrol;
+                int idsection;
+                string namecourse;
+                float score;
+                int attendance;
+                int id_teacher;
+                string nameteacher;
+                int id_campus;
+                string tipe_schedule;*/
+                /*string codcarr;
+                string carrera;*/
+                string sql = $"insert into tbl_carreras " +
                     "values(" +
-                    "'" + usuario.Nombre + "', " +
-                    "'" + usuario.Apellido + "')";
+                    "'" + carreras.Idrol + "', " +
+                    "'" + carreras.Namecourse + "')";
                    
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = CommandType.Text;
@@ -228,7 +247,135 @@ namespace Pintermedio.Controlador
                 Console.Write(ex.Message);
             }
             return std;
-        }*/
+        }
 
+        public bool Insert_Alumnos(DatosMoodle carreras)
+        {
+            bool std = true;
+            try
+            {
+                /*int id_table;
+                int idcourse;
+                int id_student;
+                string lastname1;
+                string lastname2;
+                string firstname;
+                string idrol;
+                int idsection;
+                string namecourse;
+                float score;
+                int attendance;
+                int id_teacher;
+                string nameteacher;
+                int id_campus;
+                string tipe_schedule;*/
+
+                string sql = $"insert into tbl_alumnos " +
+                    "values( '', " +
+                    "'" + carreras.Id_student + "', " +
+                    "'" + carreras.Lastname1 + "', " +
+                    "'" + carreras.Lastname2 + "', " +
+                    "'" + carreras.Firstname + "', " +
+                    "'" + carreras.Idrol + "', " +
+                    "'" + carreras.Idcourse + "', " +
+                    "'" + carreras.Id_teacher + "', " +
+                    "'" + carreras.Id_campus + "')";
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql;
+                db = new BaseDato();
+                db.EjecutarConsultaSQLServer(cmd);
+                std = true;
+            }
+            catch (Exception ex)
+            {
+                std = false;
+                Console.Write(ex.Message);
+            }
+            return std;
+        }
+
+        public bool Insert_Campus(DatosMoodle carreras)
+        {
+            bool std = true;
+            try
+            {
+                /*int id_table;
+                int idcourse;
+                int id_student;
+                string lastname1;
+                string lastname2;
+                string firstname;
+                string idrol;
+                int idsection;
+                string namecourse;
+                float score;
+                int attendance;
+                int id_teacher;
+                string nameteacher;
+                int id_campus;
+                string tipe_schedule;*/
+
+                string sql = $"insert into tbl_campus " +
+                    "values(" +
+                    "'" + carreras.Id_campus + "', " +
+                    "'nombre campus')";
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql;
+                db = new BaseDato();
+                db.EjecutarConsultaSQLServer(cmd);
+                std = true;
+            }
+            catch (Exception ex)
+            {
+                std = false;
+                Console.Write(ex.Message);
+            }
+            return std;
+        }
+
+        public bool Insert_Curso(DatosMoodle carreras)
+        {
+            bool std = true;
+            try
+            {
+                /*int id_table;
+                int idcourse;
+                int id_student;
+                string lastname1;
+                string lastname2;
+                string firstname;
+                string idrol;
+                int idsection;
+                string namecourse;
+                float score;
+                int attendance;
+                int id_teacher;
+                string nameteacher;
+                int id_campus;
+                string tipe_schedule;*/
+
+                string sql = $"insert into tbl_cursos " +
+                    "values(" +
+                    "'" + carreras.Idcourse + "', " +
+                    "'" + carreras.Namecourse + "')";
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql;
+                db = new BaseDato();
+                db.EjecutarConsultaSQLServer(cmd);
+                std = true;
+            }
+            catch (Exception ex)
+            {
+                std = false;
+                Console.Write(ex.Message);
+            }
+            return std;
+        }
     } //fin de servicios
 }
