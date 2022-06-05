@@ -317,7 +317,7 @@ namespace Pintermedio.Controlador
                 int id_campus;
                 string tipe_schedule;*/
 
-                string sql = $"insert into tbl_alumnos " +
+                string sql = $"insert into tbl_campus " +
                     "values(" +
                     "'" + carreras.Id_campus + "', " +
                     "'nombre campus')";
@@ -358,7 +358,7 @@ namespace Pintermedio.Controlador
                 int id_campus;
                 string tipe_schedule;*/
 
-                string sql = $"insert into tbl_alumnos " +
+                string sql = $"insert into tbl_cursos " +
                     "values(" +
                     "'" + carreras.Idcourse + "', " +
                     "'" + carreras.Namecourse + "')";
