@@ -87,7 +87,7 @@
   
   <p> <a href="https://imgur.com/a/bgPUdGE">foto 2</a></p>
   
-  <p> <a href="https://i.imgur.com/OgrEd9oh.jpg">foto 3</a></p>
+  <p> <a href="https://imgur.com/a/tzR1A8u">foto 3</a></p>
   
   <p>Nota: Si les acomoda pueden trabajar con GitHub Desktop, solo tener cuidado con lo que hacen,<a href="https://desktop.github.com" target="_blank"> Link de descarga</a></p>
 </dl>
