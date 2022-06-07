@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Pintermedio.Pages
+namespace P_MOOU_.Pages
 {
     public class PrivacyModel : PageModel
     {
