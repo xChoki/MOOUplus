@@ -93,3 +93,4 @@ D:\GIT Clones\MOOUplus\P_MOOU+\obj\Debug\netcoreapp3.1\P_MOOU+.csproj.CopyComple
 D:\GIT Clones\MOOUplus\P_MOOU+\obj\Debug\netcoreapp3.1\P_MOOU+.dll
 D:\GIT Clones\MOOUplus\P_MOOU+\obj\Debug\netcoreapp3.1\P_MOOU+.pdb
 D:\GIT Clones\MOOUplus\P_MOOU+\obj\Debug\netcoreapp3.1\P_MOOU+.genruntimeconfig.cache
+D:\GIT Clones\MOOUplus\P_MOOU+\obj\Debug\netcoreapp3.1\Razor\Pages\ActualizarInfo.cshtml.g.cs

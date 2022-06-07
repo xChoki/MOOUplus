@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Pintermedio.Controlador;
+using P_MOOU_.Controlador;
 using System;
 using System.Collections.Generic;
 using System.Linq;

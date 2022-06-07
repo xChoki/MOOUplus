@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Pintermedio.Pages
+namespace P_MOOU_.Pages
 {
     public class Codigos_EquivalenteModel : PageModel
     {

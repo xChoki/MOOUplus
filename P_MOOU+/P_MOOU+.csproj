@@ -6,6 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="servicio\**" />
+    <Content Remove="servicio\**" />
+    <EmbeddedResource Remove="servicio\**" />
+    <None Remove="servicio\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Modelo\CarrerasMoodle.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Pages\Views\_GridView.cshtml" />
     <Content Remove="Pages\_ViewImports.cshtml" />
   </ItemGroup>

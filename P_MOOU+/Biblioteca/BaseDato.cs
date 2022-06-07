@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Pintermedio.Biblioteca
+namespace P_MOOU_.Biblioteca
 {
     public class BaseDato
     {
