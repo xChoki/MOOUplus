@@ -203,9 +203,9 @@ namespace P_MOOU_.Controlador
             DataTable dt = null;
             List<CarrerasUmas> lista = new List<CarrerasUmas>();
             CarrerasUmas carrerasumas;
-            string sql = "select * from tbl_carreras";
+            string sql = "select DISTINCT codcarr, nombrecarr from tbl_carreras";
             if (idcarrera != -1)
-                sql = "select * from tbl_carreras where codcarr=" + idcarrera;
+                sql = "select DISTINCT codcarr, nombrecarr from tbl_carreras where codcarr=" + idcarrera;
             try
             {
 
@@ -218,8 +218,8 @@ namespace P_MOOU_.Controlador
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     carrerasumas = new CarrerasUmas();
-                    carrerasumas.Codcarr = dt.Rows[i]["codcarr"].ToString();
-                    carrerasumas.Carrera = dt.Rows[i]["carrera"].ToString();
+                    carrerasumas.Codcarr = int.Parse(dt.Rows[i]["codcarr"].ToString());
+                    carrerasumas.Nombrecarr = dt.Rows[i]["nombrecarr"].ToString();
                     lista.Add(carrerasumas);
                 }
                 return lista;
@@ -238,9 +238,9 @@ namespace P_MOOU_.Controlador
             List<EquivMoodleUmas> lista = new List<EquivMoodleUmas>();
             EquivMoodleUmas equivMoodleUmas;
 
-            string sql = "select m.idcourse, c.codcarr, c.carrera from MYSQL...tbl_datosmoodle m join DB_UMAS.dbo.tbl_carreras c on m.idrol = c.codcarr";
-            if (idcarrera != "")
-                sql = "select m.idcourse, c.codcarr, c.carrera from MYSQL...tbl_datosmoodle m join DB_UMAS.dbo.tbl_carreras c on m.idrol = c.codcarr where c.codcarr = '" + idcarrera + "')";
+            string sql = "select m.idrol, u.codcarr, u.nombrecarr from MYSQL...tbl_datosmoodle m join DB_UMAS.dbo.tbl_carreras u on m.idrol = u.codcurso group by u.codcarr, m.idrol, u.nombrecarr";
+            //if (idcarrera != "")
+                //sql = "select m.idrol, u.codcarr from MYSQL...tbl_datosmoodle m join DB_UMAS.dbo.tbl_carreras u on m.idrol = u.codcurso where c.codcarr = '" + idcarrera + " group by u.codcarr, m.idrol')";
             try
             {
                 SqlCommand cmd = new SqlCommand();
@@ -252,9 +252,9 @@ namespace P_MOOU_.Controlador
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     equivMoodleUmas = new EquivMoodleUmas();
-                    equivMoodleUmas.Idcourse = int.Parse(dt.Rows[i]["idcourse"].ToString());
-                    equivMoodleUmas.Codcarr = dt.Rows[i]["codcarr"].ToString();
-                    equivMoodleUmas.Nombre = dt.Rows[i]["carrera"].ToString();
+                    equivMoodleUmas.Idrol = dt.Rows[i]["idrol"].ToString();
+                    equivMoodleUmas.Codcarr = int.Parse(dt.Rows[i]["codcarr"].ToString());
+                    equivMoodleUmas.Nombrecarr = dt.Rows[i]["nombrecarr"].ToString();
                     lista.Add(equivMoodleUmas);
                 }
                 return lista;

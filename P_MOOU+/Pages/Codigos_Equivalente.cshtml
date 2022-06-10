@@ -21,13 +21,13 @@
 }
 
 <div class="accordion" id="accordionExample">
-    @foreach (var c in listacarreras)
+    @foreach (var c in listaequiv)
     {
         <div class="accordion-item">
 
             <h2 class="accordion-header" id="heading_@ij">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_@ij" aria-expanded="true" aria-controls="collapse_@ij">
-                    @c.Carrera
+                    @c.Nombrecarr
                 </button>
             </h2>
             <div id="collapse_@ij" class="accordion-collapse collapse" aria-labelledby="heading_@ij" data-bs-parent="#accordionExample">
@@ -42,14 +42,7 @@
                         <tbody>
                             <tr>
                                 <td>@c.Codcarr</td>
-                                @foreach (var e in listaequiv)
-                                {
-                                    if (@e.Codcarr == @c.Codcarr)
-                                    {
-
-                                        <td>@e.Idcourse</td>
-                                    }
-                                }
+                                <td>@c.Idrol</td>
                             </tr>
                         </tbody>
                     </table>
@@ -59,6 +52,3 @@
         ij++;
     }
 </div>
-
-
-

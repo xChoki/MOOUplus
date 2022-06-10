@@ -9,15 +9,14 @@ namespace P_MOOU_.Modelo
 {
     public class EquivMoodleUmas
     {
-        int idcourse;
-        string codcarr;
-        string nombre;
+        string idrol;
+        int codcarr;
+        string nombrecarr;
 
         public EquivMoodleUmas() { }
-        public int Idcourse { get => idcourse; set => idcourse = value; }
-        public string Codcarr { get => codcarr; set => codcarr = value; }
-        public string Nombre { get => nombre; set => nombre = value; }
 
-        
+        public string Idrol { get => idrol; set => idrol = value; }
+        public int Codcarr { get => codcarr; set => codcarr = value; }
+        public string Nombrecarr { get => nombrecarr; set => nombrecarr = value; }
     }
 }
