@@ -203,9 +203,9 @@ namespace P_MOOU_.Controlador
             DataTable dt = null;
             List<CarrerasUmas> lista = new List<CarrerasUmas>();
             CarrerasUmas carrerasumas;
-            string sql = "select DISTINCT codcarr, nombrecarr from tbl_carreras";
+            string sql = "select DISTINCT codcarr, nombrecarr from tbl_carreras order by nombrecarr";
             if (idcarrera != -1)
-                sql = "select DISTINCT codcarr, nombrecarr from tbl_carreras where codcarr=" + idcarrera;
+                sql = "select DISTINCT codcarr, nombrecarr from tbl_carreras where codcarr=" + idcarrera + "order by nombrecarr";
             try
             {
 
