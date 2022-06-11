@@ -74,6 +74,18 @@ namespace P_MOOU_.Pages
             }
             ViewData["Message"] = "Cursos";
         }
+        public void OnPostFuncionNotas()
+        {
+            Servicios servicio = new Servicios();
+            List<DatosNotas> lista;
+            lista = servicio.ListarNotasMoodle(-1);
+
+            foreach (var c in lista)
+            {
+                servicio.Procedure_Notas(c);
+            }
+            ViewData["Message"] = "Notas";
+        }
 
     }
 }

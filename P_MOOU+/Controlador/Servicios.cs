@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
 using P_MOOU_.Biblioteca;
 using P_MOOU_.Modelo;
@@ -64,6 +65,65 @@ namespace P_MOOU_.Controlador
 
             }
         }
+
+        public List<DatosNotas> ListarNotasMoodle(int id)
+        {
+            DataTable dt = null;
+            List<DatosNotas> lista = new List<DatosNotas>();
+            DatosNotas usuario;
+            string sql = "select id_student, score from tbl_datosmoodle";
+            if (id != -1)
+                sql = "select id_student, score from tbl_datosmoodle where id_student=" + id + " group by id_student";
+            try
+            {
+
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql;
+                db = new BaseDato();
+                dt = db.EjecutarConsultaMySql(cmd);
+                //pasamos del DataTable a una List de Clientes                 
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    usuario = new DatosNotas();
+                    usuario.Codalu = int.Parse(dt.Rows[i]["id_student"].ToString());
+                    usuario.Nota = float.Parse(dt.Rows[i]["score"].ToString());
+
+                    lista.Add(usuario);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+
+            }
+        }
+        public bool Procedure_Notas(DatosNotas notas)
+        {
+            bool std = true;
+            try
+            {
+                string sql = $"EXEC sp_InsertarNotas " +
+                    "" + notas.Codalu + ", " +
+                    "" + notas.Nota + ")";
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = sql;
+                db = new BaseDato();
+                db.EjecutarConsultaSQLServer(cmd);
+                std = true;
+            }
+            catch (Exception ex)
+            {
+                std = false;
+                Console.Write(ex.Message);
+            }
+            return std;
+        }
+
 
         public List<DatosCarrerasMoodle> ListarCarrerasMySql(string idrol)
         {
