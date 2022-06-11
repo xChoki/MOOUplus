@@ -198,6 +198,39 @@ namespace P_MOOU_.Controlador
         }
 
         //select r.nombreramo,r.codramo from ramos r join ramoscarrera rc on r.codramo = rc.codramo where rc.codcarr=320001;
+        public List<CarrerasUmas> GetNombreCarreras(int idcarrera)
+        {
+            DataTable dt = null;
+            List<CarrerasUmas> lista = new List<CarrerasUmas>();
+            CarrerasUmas carrerasumas;
+            string sql = "select DISTINCT nombrecarr from tbl_carreras group by codcarr, nombrecarr order by nombrecarr";
+            if (idcarrera != -1)
+                sql = "select DISTINCT nombrecarr from tbl_carreras where codcarr=" + idcarrera + "group by codcarr, nombrecarr order by nombrecarr";
+            try
+            {
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql;
+                db = new BaseDato();
+                dt = db.EjecutarConsultaSQLServer(cmd);
+                //pasamos del DataTable a una List de Clientes                 
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    carrerasumas = new CarrerasUmas();
+                    carrerasumas.Nombrecarr = dt.Rows[i]["nombrecarr"].ToString();
+                    lista.Add(carrerasumas);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+
+            }
+        }
+
         public List<CarrerasUmas> GetCarreras(int idcarrera)
         {
             DataTable dt = null;

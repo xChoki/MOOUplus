@@ -18,16 +18,20 @@
 
     List<EquivMoodleUmas> listaequiv = new List<EquivMoodleUmas>();
     listaequiv = servicio.GetEquivMoodleUmas("");
+
+    List<CarrerasUmas> listanombres = new List<CarrerasUmas>();
+    listanombres = servicio.GetNombreCarreras(-1);
+
 }
 
 <div class="accordion" id="accordionExample">
-    @foreach (var c in listacarreras)
+    @foreach (var c in listanombres)
     {
         <div class="accordion-item">
 
             <h2 class="accordion-header" id="heading_@ij">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_@ij" aria-expanded="true" aria-controls="collapse_@ij">
-                    [@c.Codcarr] @c.Nombrecarr
+                    @c.Nombrecarr
                 </button>
             </h2>
             <div id="collapse_@ij" class="accordion-collapse collapse" aria-labelledby="heading_@ij" data-bs-parent="#accordionExample">
@@ -40,15 +44,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>@c.Codcarr</td>
-                                @foreach (var e in listaequiv)
+                            @foreach (var e in listaequiv)
+                            {
+                                if (e.Nombrecarr == c.Nombrecarr)
                                 {
-                                    if(e.Codcarr == c.Codcarr) { 
-                                        <td>@e.Idrol</td>
-                                    }
+                                <tr>
+                                    <td>@e.Codcarr</td>
+                                    <td>@e.Idrol</td>
+                                </tr>
                                 }
-                            </tr>
+                            }
                         </tbody>
                     </table>
                 </div>
