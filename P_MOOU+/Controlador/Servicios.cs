@@ -66,29 +66,28 @@ namespace P_MOOU_.Controlador
             }
         }
 
-        public List<DatosNotas> ListarNotasMoodle(int id)
+        public List<DatosNotas> ListarNotas(int id)
         {
             DataTable dt = null;
             List<DatosNotas> lista = new List<DatosNotas>();
             DatosNotas usuario;
-            string sql = "select id_student, score from tbl_datosmoodle";
-            if (id != -1)
-                sql = "select id_student, score from tbl_datosmoodle where id_student=" + id + " group by id_student";
+            string sql = "select n.codalu, m.idrol, u.codcarr, m.score from MYSQL...tbl_datosmoodle m join DB_UMAS.dbo.tbl_carreras u on m.idrol = u.codcurso join DB_UMAS.dbo.tbl_notas n on n.codcurso = u.codcurso";
+
             try
             {
-
-                MySqlCommand cmd = new MySqlCommand();
+                SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = sql;
                 db = new BaseDato();
-                dt = db.EjecutarConsultaMySql(cmd);
+                dt = db.EjecutarConsultaSQLServer(cmd);
                 //pasamos del DataTable a una List de Clientes                 
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     usuario = new DatosNotas();
-                    usuario.Codalu = int.Parse(dt.Rows[i]["id_student"].ToString());
+                    usuario.Codalu = int.Parse(dt.Rows[i]["codalu"].ToString());
+                    usuario.Idrol = dt.Rows[i]["idrol"].ToString();
+                    usuario.Codcarr = int.Parse(dt.Rows[i]["codcarr"].ToString());
                     usuario.Nota = float.Parse(dt.Rows[i]["score"].ToString());
-
                     lista.Add(usuario);
                 }
                 return lista;
@@ -100,14 +99,34 @@ namespace P_MOOU_.Controlador
 
             }
         }
-        public bool Procedure_Notas(DatosNotas notas)
+        public bool Procedure_NotasDist(DatosNotas notas)
         {
             bool std = true;
             try
             {
-                string sql = $"EXEC sp_InsertarNotas " +
-                    "" + notas.Codalu + ", " +
-                    "" + notas.Nota + ")";
+                string sql = $"update tbl_notas set nota = " + notas.Nota + " where codalu = " + notas.Codalu + " and nota = NULL and codcarr = " + notas.Codcarr;
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql;
+                db = new BaseDato();
+                db.EjecutarConsultaSQLServer(cmd);
+                std = true;
+            }
+            catch (Exception ex)
+            {
+                std = false;
+                Console.Write(ex.Message);
+            }
+            return std;
+        }
+
+        public bool Procedure_NotasVacio(DatosNotas notas)
+        {
+            bool std = true;
+            try
+            {
+                string sql = $"update tbl_notas set nota = " + notas.Nota + " where codalu = " + notas.Codalu + " and nota = NULL";
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -123,7 +142,6 @@ namespace P_MOOU_.Controlador
             }
             return std;
         }
-
 
         public List<DatosCarrerasMoodle> ListarCarrerasMySql(string idrol)
         {
