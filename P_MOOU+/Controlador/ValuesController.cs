@@ -27,7 +27,7 @@ namespace ASPNETCore_StoredProcs.Controllers
         }
 
         // GET api/values/5
-        [HttpGet("{id}")]
+        [HttpGet("{Codalu}")]
         public async Task<ActionResult<Value>> Get(int id)
         {
             var response = await _repository.GetById(id);
@@ -43,13 +43,13 @@ namespace ASPNETCore_StoredProcs.Controllers
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
+        [HttpPut("{Codalu}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
         // DELETE api/values/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{Codalu}")]
         public async Task Delete(int id)
         {
            await _repository.DeleteById(id);

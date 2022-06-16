@@ -45,8 +45,7 @@ namespace P_MOOU_.Data
         {
             return new Value()
             {
-                Codalu = (int)reader["Codalu"],
-                Nota = (float)reader["Nota"]
+                Codalu = (int)reader["Codalu"]
             };
         }
 
