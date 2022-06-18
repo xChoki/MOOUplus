@@ -78,11 +78,12 @@ namespace P_MOOU_.Pages
         {
             Servicios servicio = new Servicios();
             List<DatosNotas> lista;
-            lista = servicio.ListarNotas(-1);
+            lista = servicio.ListarNotas();
 
             foreach (var c in lista)
             {
-                servicio.Procedure_NotasDist(c);
+                servicio.P_InsertNotas(c);
+                //servicio.Procedure_NotasDist(c);
                 //servicio.Procedure_NotasVacio(c);
             }
             ViewData["Message"] = "Notas";

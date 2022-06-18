@@ -10,13 +10,14 @@ namespace P_MOOU_.Modelo
         int codalu;
         string idrol;
         int codcarr;
-        float nota;
+        float notaM;
 
         public DatosNotas() { }
 
         public int Codalu { get => codalu; set => codalu = value; }
         public string Idrol { get => idrol; set => idrol = value; }
         public int Codcarr { get => codcarr; set => codcarr = value; }
-        public float Nota { get => nota; set => nota = value; }
+        public float NotaM { get => notaM; set => notaM = value; }
+        public float NotaU { get => notaU; set => notaU = value; }
     }
 }

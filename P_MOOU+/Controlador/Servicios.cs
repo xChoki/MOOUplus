@@ -65,12 +65,42 @@ namespace P_MOOU_.Controlador
 
             }
         }
+        
+        public bool P_InsertNotas(DatosNotas notas)
+        {
+            bool std = true;
+            DataTable dt = null;
+            SqlParameter param;
+            List<DatosNotas> lista = new List<DatosNotas>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "sp_InsertarNotas";
 
-        public List<DatosNotas> ListarNotas(int id)
+                param = new SqlParameter("@codalu", notas.Codalu);
+                param.Direction = ParameterDirection.InputOutput;
+                param.DbType = DbType.Int32;
+
+                cmd.Parameters.Add(param);
+
+                db = new BaseDato();
+                db.EjecutarConsultaSQLServer(cmd);
+                std = true;
+            }
+            catch (Exception ex)
+            {
+                std = false;
+                Console.Write(ex.Message);
+            }
+            return std;
+        }
+
+        public List<DatosNotas> ListarNotas()
         {
             DataTable dt = null;
             List<DatosNotas> lista = new List<DatosNotas>();
-            DatosNotas usuario;
+            DatosNotas nota;
             string sql = "select n.codalu, m.idrol, u.codcarr, m.score from MYSQL...tbl_datosmoodle m join DB_UMAS.dbo.tbl_carreras u on m.idrol = u.codcurso join DB_UMAS.dbo.tbl_notas n on n.codcurso = u.codcurso";
 
             try
@@ -83,12 +113,12 @@ namespace P_MOOU_.Controlador
                 //pasamos del DataTable a una List de Clientes                 
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    usuario = new DatosNotas();
-                    usuario.Codalu = int.Parse(dt.Rows[i]["codalu"].ToString());
-                    usuario.Idrol = dt.Rows[i]["idrol"].ToString();
-                    usuario.Codcarr = int.Parse(dt.Rows[i]["codcarr"].ToString());
-                    usuario.Nota = float.Parse(dt.Rows[i]["score"].ToString());
-                    lista.Add(usuario);
+                    nota = new DatosNotas();
+                    nota.Codalu = int.Parse(dt.Rows[i]["codalu"].ToString());
+                    nota.Idrol = dt.Rows[i]["idrol"].ToString();
+                    nota.Codcarr = int.Parse(dt.Rows[i]["codcarr"].ToString());
+                    nota.NotaM = float.Parse(dt.Rows[i]["score"].ToString());
+                    lista.Add(nota);
                 }
                 return lista;
             }
@@ -99,12 +129,13 @@ namespace P_MOOU_.Controlador
 
             }
         }
+
         public bool Procedure_NotasDist(DatosNotas notas)
         {
             bool std = true;
             try
             {
-                string sql = $"update tbl_notas set nota = " + notas.Nota + " where codalu = " + notas.Codalu + " and nota = NULL and codcarr = " + notas.Codcarr;
+                string sql = $"update tbl_notas set nota = " + notas.NotaM + " where codalu = " + notas.Codalu + " and nota <> " + notas.NotaM;
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = CommandType.Text;
@@ -126,7 +157,7 @@ namespace P_MOOU_.Controlador
             bool std = true;
             try
             {
-                string sql = $"update tbl_notas set nota = " + notas.Nota + " where codalu = " + notas.Codalu + " and nota = NULL";
+                string sql = $"update tbl_notas set nota = " + notas.NotaM + " where codalu = " + notas.Codalu + " and nota = NULL";
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = CommandType.StoredProcedure;
