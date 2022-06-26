@@ -114,6 +114,7 @@ namespace P_MOOU_.Controlador
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     nota = new DatosNotas();
+                    nota = new DatosNotas();
                     nota.Codalu = int.Parse(dt.Rows[i]["codalu"].ToString());
                     nota.Idrol = dt.Rows[i]["idrol"].ToString();
                     nota.Codcarr = int.Parse(dt.Rows[i]["codcarr"].ToString());
@@ -380,7 +381,7 @@ namespace P_MOOU_.Controlador
             List<EquivMoodleUmas> lista = new List<EquivMoodleUmas>();
             EquivMoodleUmas equivMoodleUmas;
 
-            string sql = "select m.idrol, u.codcarr, u.nombrecarr from MYSQL...tbl_datosmoodle m join DB_UMAS.dbo.tbl_carreras u on m.idrol = u.codcurso group by u.codcarr, m.idrol, u.nombrecarr";
+            string sql = "select m.idrol, u.codcarr, u.nombrecarr, u.nombrecurso, u.escuelacarr from MYSQL...tbl_datosmoodle m join DB_UMAS.dbo.tbl_carreras u on m.idrol = u.codcurso group by u.codcarr, m.idrol, u.nombrecarr, u.nombrecurso, u.escuelacarr";
             //if (idcarrera != "")
                 //sql = "select m.idrol, u.codcarr from MYSQL...tbl_datosmoodle m join DB_UMAS.dbo.tbl_carreras u on m.idrol = u.codcurso where c.codcarr = '" + idcarrera + " group by u.codcarr, m.idrol')";
             try
@@ -397,6 +398,8 @@ namespace P_MOOU_.Controlador
                     equivMoodleUmas.Idrol = dt.Rows[i]["idrol"].ToString();
                     equivMoodleUmas.Codcarr = int.Parse(dt.Rows[i]["codcarr"].ToString());
                     equivMoodleUmas.Nombrecarr = dt.Rows[i]["nombrecarr"].ToString();
+                    equivMoodleUmas.Nombrecurso = dt.Rows[i]["nombrecurso"].ToString();
+                    equivMoodleUmas.Escuelacarr = dt.Rows[i]["escuelacarr"].ToString();
                     lista.Add(equivMoodleUmas);
                 }
                 return lista;
