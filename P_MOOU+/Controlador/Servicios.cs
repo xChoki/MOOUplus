@@ -131,6 +131,41 @@ namespace P_MOOU_.Controlador
             }
         }
 
+        public List<DatosNotasMoodle> ListarNotasMoodle(int idstudent)
+        {
+            DataTable dt = null;
+            List<DatosNotasMoodle> lista = new List<DatosNotasMoodle>();
+            DatosNotasMoodle nota;
+            string sql = "select ua.id_student, ua.score, ua.idcourse, ua.namecourse from MYSQL...tbl_datosmoodle ua order by ua.id_student";
+            if (idstudent != -1)
+                sql = "select ua.id_student, ua.score, ua.idcourse, ua.namecourse from MYSQL...tbl_datosmoodle ua where id_student = " + idstudent + " order by ua.id_student";
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql;
+                db = new BaseDato();
+                dt = db.EjecutarConsultaSQLServer(cmd);
+                //pasamos del DataTable a una List de Clientes                 
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    nota = new DatosNotasMoodle();
+                    nota.Id_student = int.Parse(dt.Rows[i]["id_student"].ToString());
+                    nota.Score = float.Parse(dt.Rows[i]["score"].ToString());
+                    nota.Idcourse = int.Parse(dt.Rows[i]["idcourse"].ToString());
+                    nota.Namecourse = dt.Rows[i]["namecourse"].ToString();
+                    lista.Add(nota);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+
+            }
+        }
+
         public bool Procedure_NotasDist(DatosNotas notas)
         {
             bool std = true;
