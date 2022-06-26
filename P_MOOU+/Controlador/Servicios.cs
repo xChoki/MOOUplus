@@ -66,6 +66,7 @@ namespace P_MOOU_.Controlador
             }
         }
         
+        /*
         public bool P_InsertNotas(DatosNotas notas)
         {
             bool std = true;
@@ -94,15 +95,16 @@ namespace P_MOOU_.Controlador
                 Console.Write(ex.Message);
             }
             return std;
-        }
+        }*/
 
-        public List<DatosNotas> ListarNotas()
+        public List<DatosNotas> ListarNotasUmas(int idalumno)
         {
             DataTable dt = null;
             List<DatosNotas> lista = new List<DatosNotas>();
             DatosNotas nota;
-            string sql = "select n.codalu, m.idrol, u.codcarr, m.score from MYSQL...tbl_datosmoodle m join DB_UMAS.dbo.tbl_carreras u on m.idrol = u.codcurso join DB_UMAS.dbo.tbl_notas n on n.codcurso = u.codcurso";
-
+            string sql = "select * from tbl_notas order by codalu";
+            if (idalumno != -1)
+                sql = "select * from tbl_notas where codalu = "+ idalumno + " order by codalu";
             try
             {
                 SqlCommand cmd = new SqlCommand();
@@ -114,11 +116,17 @@ namespace P_MOOU_.Controlador
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     nota = new DatosNotas();
-                    nota = new DatosNotas();
                     nota.Codalu = int.Parse(dt.Rows[i]["codalu"].ToString());
-                    nota.Idrol = dt.Rows[i]["idrol"].ToString();
-                    nota.Codcarr = int.Parse(dt.Rows[i]["codcarr"].ToString());
-                    nota.NotaM = float.Parse(dt.Rows[i]["score"].ToString());
+                    nota.Codcurso = dt.Rows[i]["codcurso"].ToString();
+                    nota.Idseccion = int.Parse(dt.Rows[i]["idseccion"].ToString());
+                    nota.Nombrecurso = dt.Rows[i]["nombrecurso"].ToString();
+                    nota.Codcarr = int.Parse(dt.Rows[i]["Codcarr"].ToString());
+                    nota.Rutprofesor = int.Parse(dt.Rows[i]["rutprofesor"].ToString());
+                    nota.Periodo = int.Parse(dt.Rows[i]["periodo"].ToString());
+                    nota.Anno = int.Parse(dt.Rows[i]["anno"].ToString());
+                    nota.Nota = float.Parse(dt.Rows[i]["nota"].ToString());
+                    nota.Estatus = dt.Rows[i]["estatus"].ToString();
+                    nota.Ocasion = int.Parse(dt.Rows[i]["ocasion"].ToString());
                     lista.Add(nota);
                 }
                 return lista;
@@ -164,50 +172,6 @@ namespace P_MOOU_.Controlador
                 return null;
 
             }
-        }
-
-        public bool Procedure_NotasDist(DatosNotas notas)
-        {
-            bool std = true;
-            try
-            {
-                string sql = $"update tbl_notas set nota = " + notas.NotaM + " where codalu = " + notas.Codalu + " and nota <> " + notas.NotaM;
-
-                SqlCommand cmd = new SqlCommand();
-                cmd.CommandType = CommandType.Text;
-                cmd.CommandText = sql;
-                db = new BaseDato();
-                db.EjecutarConsultaSQLServer(cmd);
-                std = true;
-            }
-            catch (Exception ex)
-            {
-                std = false;
-                Console.Write(ex.Message);
-            }
-            return std;
-        }
-
-        public bool Procedure_NotasVacio(DatosNotas notas)
-        {
-            bool std = true;
-            try
-            {
-                string sql = $"update tbl_notas set nota = " + notas.NotaM + " where codalu = " + notas.Codalu + " and nota = NULL";
-
-                SqlCommand cmd = new SqlCommand();
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = sql;
-                db = new BaseDato();
-                db.EjecutarConsultaSQLServer(cmd);
-                std = true;
-            }
-            catch (Exception ex)
-            {
-                std = false;
-                Console.Write(ex.Message);
-            }
-            return std;
         }
 
         public List<DatosCarrerasMoodle> ListarCarrerasMySql(string idrol)

@@ -62,11 +62,12 @@ namespace P_MOOU_.Pages
             }
             ViewData["Message"] = "Insertado Profesores exitosamente";
         }
+        /*
         public void OnPostFuncionNotas()
         {
             Servicios servicio = new Servicios();
-            List<DatosNotas> lista;
-            lista = servicio.ListarNotas();
+            List<DatosNotasMoodle> lista;
+            lista = servicio.ListarNotasMoodle(-1);
 
             foreach (var c in lista)
             {
@@ -76,6 +77,7 @@ namespace P_MOOU_.Pages
             }
             ViewData["Message"] = "Insertado Notas exitosamente";
         }
+        */
 
     }
 }

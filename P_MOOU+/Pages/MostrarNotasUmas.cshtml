@@ -11,8 +11,8 @@
 @{
     Servicios servicio = new Servicios();
 
-    List<DatosNotasMoodle> listanotasmoodle = new List<DatosNotasMoodle>();
-    listanotasmoodle = servicio.ListarNotasMoodle(-1);
+    List<DatosNotas> listanotasumas = new List<DatosNotas>();
+    listanotasumas = servicio.ListarNotasUmas(-1);
 
     List<DatosMoodle> listaalumos;
     listaalumos = servicio.ListarMySql(-1);
@@ -40,17 +40,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var e in listanotasmoodle)
+                            @foreach (var e in listanotasumas)
                             {
-                                if (e.Id_student == c.Id_student)
+                                if (e.Codalu == c.Id_student)
                                 {
-                                <tr>
-                                    <td>@e.Idcourse</td>
-                                    <td>@e.Namecourse</td>
-                                    <td>@e.Score</td>
-                                </tr>
+                                    <tr>
+                                        <td>@e.Codcurso</td>
+                                        <td>@e.Nombrecurso</td>
+                                        <td>@e.Nota</td>
+                                    </tr>
                                 }
-                                
+
                             }
                         </tbody>
                     </table>
