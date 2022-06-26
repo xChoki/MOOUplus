@@ -6,7 +6,8 @@
 @{
 }
 <h2>Generar Códigos Equivalente</h2>
-@{int ij = 1;}
+@{int ij = 1;
+    int numcarr = 1;}
 @{
     Servicios servicio = new Servicios();
 
@@ -31,7 +32,7 @@
 
             <h2 class="accordion-header" id="heading_@ij">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_@ij" aria-expanded="true" aria-controls="collapse_@ij">
-                    @c.Nombrecarr
+                    @numcarr - @c.Nombrecarr
                 </button>
             </h2>
             <div id="collapse_@ij" class="accordion-collapse collapse" aria-labelledby="heading_@ij" data-bs-parent="#accordionExample">
@@ -63,6 +64,7 @@
                 </div>
             </div>
         </div>
+        numcarr++;
         ij++;
     }
 </div>

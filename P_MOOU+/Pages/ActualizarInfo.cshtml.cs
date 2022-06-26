@@ -36,7 +36,7 @@ namespace P_MOOU_.Pages
             {
                 servicio.Insert_Carreras(c);
             }
-            ViewData["Message"] = "Carrera";
+            ViewData["Message"] = "Insertado Carreras exitosamente";
         }
         public void OnPostFuncionCampus()
         {
@@ -48,7 +48,7 @@ namespace P_MOOU_.Pages
             {
                 servicio.Insert_Campus(c);
             }
-            ViewData["Message"] = "Campus";
+            ViewData["Message"] = "Insertado Campus exitosamente";
         }
         public void OnPostFuncionProfesores()
         {
@@ -60,19 +60,7 @@ namespace P_MOOU_.Pages
             {
                 servicio.Insert_Profesores(p);
             }
-            ViewData["Message"] = "Profesores";
-        }
-        public void OnPostFuncionCursos()
-        {
-            Servicios servicio = new Servicios();
-            List<DatosCursosMoodle> lista;
-            lista = servicio.ListarCursosMoodle("");
-
-            foreach (var c in lista)
-            {
-                servicio.Insert_Curso(c);
-            }
-            ViewData["Message"] = "Cursos";
+            ViewData["Message"] = "Insertado Profesores exitosamente";
         }
         public void OnPostFuncionNotas()
         {
@@ -86,7 +74,7 @@ namespace P_MOOU_.Pages
                 //servicio.Procedure_NotasDist(c);
                 //servicio.Procedure_NotasVacio(c);
             }
-            ViewData["Message"] = "Notas";
+            ViewData["Message"] = "Insertado Notas exitosamente";
         }
 
     }

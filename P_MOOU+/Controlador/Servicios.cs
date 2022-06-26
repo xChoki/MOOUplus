@@ -215,7 +215,7 @@ namespace P_MOOU_.Controlador
             DataTable dt = null;
             List<DatosCarrerasMoodle> lista = new List<DatosCarrerasMoodle>();
             DatosCarrerasMoodle carrera;
-            string sql = "select idrol, namecourse from tbl_datosmoodle group by idrol;";
+            string sql = "select idrol, namecourse, idcourse from tbl_datosmoodle group by idrol;";
             if (idrol != "")
                 sql = "select idrol, namecourse from tbl_datosmoodle where idrol=" + idrol + " group by idrol";
             try
@@ -490,7 +490,7 @@ namespace P_MOOU_.Controlador
                     "values(" +
                     "'" + carreras.Idrol + "', " +
                     "'" + carreras.Namecourse + "')";
-                   
+
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = sql;

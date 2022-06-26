@@ -9,10 +9,12 @@ namespace P_MOOU_.Modelo
     {
         string idrol;
         string namecourse;
+        int idcourse;
 
         public DatosCarrerasMoodle() { }
 
         public string Idrol { get => idrol; set => idrol = value; }
         public string Namecourse { get => namecourse; set => namecourse = value; }
+        public int Idcourse { get => idcourse; set => idcourse = value; }
     }
 }
