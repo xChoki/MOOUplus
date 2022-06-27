@@ -94,3 +94,7 @@ D:\GIT Clones\MOOUplus\P_MOOU+\obj\Debug\netcoreapp3.1\P_MOOU+.dll
 D:\GIT Clones\MOOUplus\P_MOOU+\obj\Debug\netcoreapp3.1\P_MOOU+.pdb
 D:\GIT Clones\MOOUplus\P_MOOU+\obj\Debug\netcoreapp3.1\P_MOOU+.genruntimeconfig.cache
 D:\GIT Clones\MOOUplus\P_MOOU+\obj\Debug\netcoreapp3.1\Razor\Pages\ActualizarInfo.cshtml.g.cs
+D:\GIT Clones\MOOUplus\P_MOOU+\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+D:\GIT Clones\MOOUplus\P_MOOU+\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\GIT Clones\MOOUplus\P_MOOU+\obj\Debug\netcoreapp3.1\Razor\Pages\MostrarNotasM.cshtml.g.cs
+D:\GIT Clones\MOOUplus\P_MOOU+\obj\Debug\netcoreapp3.1\Razor\Pages\MostrarNotasUmas.cshtml.g.cs

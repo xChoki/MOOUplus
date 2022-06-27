@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
 using P_MOOU_.Biblioteca;
 using P_MOOU_.Modelo;
@@ -64,13 +65,121 @@ namespace P_MOOU_.Controlador
 
             }
         }
+        
+        /*
+        public bool P_InsertNotas(DatosNotas notas)
+        {
+            bool std = true;
+            DataTable dt = null;
+            SqlParameter param;
+            List<DatosNotas> lista = new List<DatosNotas>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "sp_InsertarNotas";
+
+                param = new SqlParameter("@codalu", notas.Codalu);
+                param.Direction = ParameterDirection.InputOutput;
+                param.DbType = DbType.Int32;
+
+                cmd.Parameters.Add(param);
+
+                db = new BaseDato();
+                db.EjecutarConsultaSQLServer(cmd);
+                std = true;
+            }
+            catch (Exception ex)
+            {
+                std = false;
+                Console.Write(ex.Message);
+            }
+            return std;
+        }*/
+
+        public List<DatosNotas> ListarNotasUmas(int idalumno)
+        {
+            DataTable dt = null;
+            List<DatosNotas> lista = new List<DatosNotas>();
+            DatosNotas nota;
+            string sql = "select * from tbl_notas order by codalu";
+            if (idalumno != -1)
+                sql = "select * from tbl_notas where codalu = "+ idalumno + " order by codalu";
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql;
+                db = new BaseDato();
+                dt = db.EjecutarConsultaSQLServer(cmd);
+                //pasamos del DataTable a una List de Clientes                 
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    nota = new DatosNotas();
+                    nota.Codalu = int.Parse(dt.Rows[i]["codalu"].ToString());
+                    nota.Codcurso = dt.Rows[i]["codcurso"].ToString();
+                    nota.Idseccion = int.Parse(dt.Rows[i]["idseccion"].ToString());
+                    nota.Nombrecurso = dt.Rows[i]["nombrecurso"].ToString();
+                    nota.Codcarr = int.Parse(dt.Rows[i]["Codcarr"].ToString());
+                    nota.Rutprofesor = int.Parse(dt.Rows[i]["rutprofesor"].ToString());
+                    nota.Periodo = int.Parse(dt.Rows[i]["periodo"].ToString());
+                    nota.Anno = int.Parse(dt.Rows[i]["anno"].ToString());
+                    nota.Nota = float.Parse(dt.Rows[i]["nota"].ToString());
+                    nota.Estatus = dt.Rows[i]["estatus"].ToString();
+                    nota.Ocasion = int.Parse(dt.Rows[i]["ocasion"].ToString());
+                    lista.Add(nota);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+
+            }
+        }
+
+        public List<DatosNotasMoodle> ListarNotasMoodle(int idstudent)
+        {
+            DataTable dt = null;
+            List<DatosNotasMoodle> lista = new List<DatosNotasMoodle>();
+            DatosNotasMoodle nota;
+            string sql = "select ua.id_student, ua.score, ua.idcourse, ua.namecourse from MYSQL...tbl_datosmoodle ua order by ua.id_student";
+            if (idstudent != -1)
+                sql = "select ua.id_student, ua.score, ua.idcourse, ua.namecourse from MYSQL...tbl_datosmoodle ua where id_student = " + idstudent + " order by ua.id_student";
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql;
+                db = new BaseDato();
+                dt = db.EjecutarConsultaSQLServer(cmd);
+                //pasamos del DataTable a una List de Clientes                 
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    nota = new DatosNotasMoodle();
+                    nota.Id_student = int.Parse(dt.Rows[i]["id_student"].ToString());
+                    nota.Score = float.Parse(dt.Rows[i]["score"].ToString());
+                    nota.Idcourse = int.Parse(dt.Rows[i]["idcourse"].ToString());
+                    nota.Namecourse = dt.Rows[i]["namecourse"].ToString();
+                    lista.Add(nota);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+
+            }
+        }
 
         public List<DatosCarrerasMoodle> ListarCarrerasMySql(string idrol)
         {
             DataTable dt = null;
             List<DatosCarrerasMoodle> lista = new List<DatosCarrerasMoodle>();
             DatosCarrerasMoodle carrera;
-            string sql = "select idrol, namecourse from tbl_datosmoodle group by idrol;";
+            string sql = "select idrol, namecourse, idcourse from tbl_datosmoodle group by idrol;";
             if (idrol != "")
                 sql = "select idrol, namecourse from tbl_datosmoodle where idrol=" + idrol + " group by idrol";
             try
@@ -198,14 +307,14 @@ namespace P_MOOU_.Controlador
         }
 
         //select r.nombreramo,r.codramo from ramos r join ramoscarrera rc on r.codramo = rc.codramo where rc.codcarr=320001;
-        public List<CarrerasUmas> GetCarreras(int idcarrera)
+        public List<CarrerasUmas> GetNombreCarreras(int idcarrera)
         {
             DataTable dt = null;
             List<CarrerasUmas> lista = new List<CarrerasUmas>();
             CarrerasUmas carrerasumas;
-            string sql = "select * from tbl_carreras";
+            string sql = "select DISTINCT nombrecarr from tbl_carreras group by codcarr, nombrecarr order by nombrecarr";
             if (idcarrera != -1)
-                sql = "select * from tbl_carreras where codcarr=" + idcarrera;
+                sql = "select DISTINCT nombrecarr from tbl_carreras where codcarr=" + idcarrera + "group by codcarr, nombrecarr order by nombrecarr";
             try
             {
 
@@ -218,8 +327,41 @@ namespace P_MOOU_.Controlador
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     carrerasumas = new CarrerasUmas();
-                    carrerasumas.Codcarr = dt.Rows[i]["codcarr"].ToString();
-                    carrerasumas.Carrera = dt.Rows[i]["carrera"].ToString();
+                    carrerasumas.Nombrecarr = dt.Rows[i]["nombrecarr"].ToString();
+                    lista.Add(carrerasumas);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+
+            }
+        }
+
+        public List<CarrerasUmas> GetCarreras(int idcarrera)
+        {
+            DataTable dt = null;
+            List<CarrerasUmas> lista = new List<CarrerasUmas>();
+            CarrerasUmas carrerasumas;
+            string sql = "select DISTINCT codcarr, nombrecarr from tbl_carreras order by nombrecarr";
+            if (idcarrera != -1)
+                sql = "select DISTINCT codcarr, nombrecarr from tbl_carreras where codcarr=" + idcarrera + "order by nombrecarr";
+            try
+            {
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql;
+                db = new BaseDato();
+                dt = db.EjecutarConsultaSQLServer(cmd);
+                //pasamos del DataTable a una List de Clientes                 
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    carrerasumas = new CarrerasUmas();
+                    carrerasumas.Codcarr = int.Parse(dt.Rows[i]["codcarr"].ToString());
+                    carrerasumas.Nombrecarr = dt.Rows[i]["nombrecarr"].ToString();
                     lista.Add(carrerasumas);
                 }
                 return lista;
@@ -238,9 +380,9 @@ namespace P_MOOU_.Controlador
             List<EquivMoodleUmas> lista = new List<EquivMoodleUmas>();
             EquivMoodleUmas equivMoodleUmas;
 
-            string sql = "select m.idcourse, c.codcarr, c.carrera from MYSQL...tbl_datosmoodle m join DB_UMAS.dbo.tbl_carreras c on m.idrol = c.codcarr";
-            if (idcarrera != "")
-                sql = "select m.idcourse, c.codcarr, c.carrera from MYSQL...tbl_datosmoodle m join DB_UMAS.dbo.tbl_carreras c on m.idrol = c.codcarr where c.codcarr = '" + idcarrera + "')";
+            string sql = "select m.idrol, u.codcarr, u.nombrecarr, u.nombrecurso, u.escuelacarr from MYSQL...tbl_datosmoodle m join DB_UMAS.dbo.tbl_carreras u on m.idrol = u.codcurso group by u.codcarr, m.idrol, u.nombrecarr, u.nombrecurso, u.escuelacarr";
+            //if (idcarrera != "")
+                //sql = "select m.idrol, u.codcarr from MYSQL...tbl_datosmoodle m join DB_UMAS.dbo.tbl_carreras u on m.idrol = u.codcurso where c.codcarr = '" + idcarrera + " group by u.codcarr, m.idrol')";
             try
             {
                 SqlCommand cmd = new SqlCommand();
@@ -252,9 +394,11 @@ namespace P_MOOU_.Controlador
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     equivMoodleUmas = new EquivMoodleUmas();
-                    equivMoodleUmas.Idcourse = int.Parse(dt.Rows[i]["idcourse"].ToString());
-                    equivMoodleUmas.Codcarr = dt.Rows[i]["codcarr"].ToString();
-                    equivMoodleUmas.Nombre = dt.Rows[i]["carrera"].ToString();
+                    equivMoodleUmas.Idrol = dt.Rows[i]["idrol"].ToString();
+                    equivMoodleUmas.Codcarr = int.Parse(dt.Rows[i]["codcarr"].ToString());
+                    equivMoodleUmas.Nombrecarr = dt.Rows[i]["nombrecarr"].ToString();
+                    equivMoodleUmas.Nombrecurso = dt.Rows[i]["nombrecurso"].ToString();
+                    equivMoodleUmas.Escuelacarr = dt.Rows[i]["escuelacarr"].ToString();
                     lista.Add(equivMoodleUmas);
                 }
                 return lista;
@@ -310,7 +454,7 @@ namespace P_MOOU_.Controlador
                     "values(" +
                     "'" + carreras.Idrol + "', " +
                     "'" + carreras.Namecourse + "')";
-                   
+
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = sql;

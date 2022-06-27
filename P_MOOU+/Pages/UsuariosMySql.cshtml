@@ -4,7 +4,7 @@
 @using P_MOOU_.Controlador;
 @{
 }
-
+@{ int contadoralumno = 1; }
 @{
 
     List<DatosMoodle> lista;
@@ -24,6 +24,7 @@
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
+                    <th>Nro</th>
                     <th>RUT</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
@@ -35,11 +36,13 @@
 
                     <tr>
 
+                        <td>@contadoralumno</td>
                         <td>@c.Id_student</td>
                         <td>@c.Firstname</td>
                         <td>@c.Lastname1</td>
 
                     </tr>
+                    contadoralumno++;
                 }
             </tbody>
         </table>

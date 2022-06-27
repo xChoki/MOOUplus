@@ -1,0 +1,63 @@
+﻿
+@page
+@model P_MOOU_.Pages.MostrarNotasUmasModel
+@using P_MOOU_.Controlador
+@using P_MOOU_.Modelo
+@{
+}
+<h2>Mostrar notas de Moodle</h2>
+@{int ij = 1;
+    int contadoralumno = 1;}
+@{
+    Servicios servicio = new Servicios();
+
+    List<DatosNotas> listanotasumas = new List<DatosNotas>();
+    listanotasumas = servicio.ListarNotasUmas(-1);
+
+    List<DatosMoodle> listaalumos;
+    listaalumos = servicio.ListarMySql(-1);
+
+}
+
+<div class="accordion" id="accordionExample">
+    @foreach (var c in listaalumos)
+    {
+        <div class="accordion-item">
+
+            <h2 class="accordion-header" id="heading_@ij">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_@ij" aria-expanded="true" aria-controls="collapse_@ij">
+                    @contadoralumno - @c.Firstname @c.Lastname1 @c.Lastname2
+                </button>
+            </h2>
+            <div id="collapse_@ij" class="accordion-collapse collapse" aria-labelledby="heading_@ij" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID curso</th>
+                                <th scope="col">Nombre Curso</th>
+                                <th scope="col">Nota</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var e in listanotasumas)
+                            {
+                                if (e.Codalu == c.Id_student)
+                                {
+                                    <tr>
+                                        <td>@e.Codcurso</td>
+                                        <td>@e.Nombrecurso</td>
+                                        <td>@e.Nota</td>
+                                    </tr>
+                                }
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        contadoralumno++;
+        ij++;
+    }
+</div>
